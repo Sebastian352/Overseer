@@ -28,6 +28,21 @@ func (a *mapCollection) GetAll() map[uint64]App {
 	return a.elems
 }
 
+func (a *mapCollection) GetAppByName(name string) (App, error) {
+	for _, val := range a.elems {
+		if val.GetName() == name {
+			return val, nil
+		}
+	}
+	return nil, fmt.Errorf("no App with '%s' name found", name)
+}
+
+func (a *mapCollection) RemoveAll() {
+	for k := range a.elems {
+		delete(a.elems, k)
+	}
+}
+
 func NewMapCollection() AppCollection {
 	elems := make(map[uint64]App)
 	return &mapCollection{elems: elems}

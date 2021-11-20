@@ -2,6 +2,8 @@ package apps
 
 type AppCollection interface {
 	GetApp(id uint64) (App, error)
+	GetAppByName(name string) (App, error)
+	RemoveAll()
 	AddApp(App) error
 	Size() int
 	GetAll() map[uint64]App
