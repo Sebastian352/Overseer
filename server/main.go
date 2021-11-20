@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"overseer/apps"
+	"overseer/httpServer"
+	"overseer/service"
 )
 
 func main() {
@@ -11,4 +13,8 @@ func main() {
 	for key, value := range monitoredApps.GetAll() {
 		fmt.Printf("%d -> %s\n", key, value.GetName())
 	}
+
+	service := service.NewAppService()
+	server := httpServer.NewServer(service)
+	server.Run()
 }
