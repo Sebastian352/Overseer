@@ -1,4 +1,4 @@
-import { Card, CardContent, CardActions, Typography, Button } from "@mui/material";
+import { ListItemButton, ListItem, ListItemAvatar, Avatar, ListItemText, Typography, Button } from "@mui/material";
 import { Component } from "react";
 
 
@@ -13,59 +13,97 @@ export class AppCard extends Component {
             monitored: props.monitored,
             vulnerable: props.vulnerable,
             onChange: props.onChange,
-            lastMonitored: null,
         };
     }
 
     handleClick = () => {
         console.log("Clicked!");
         var newMonitored = !this.state.monitored;
-        if (newMonitored != this.state.lastMonitored) {
-            this.state.onChange(this.state.appName, newMonitored)
-            this.setState({
-                monitored: newMonitored,
-                lastMonitored: !newMonitored,
-            });
-        }
+        this.state.onChange(this.state.appName, newMonitored)
+        this.setState({
+            monitored: newMonitored,
+        });
     }
 
     // Display the Card when the app is in a monitored state.
     displayMonitored = () => {
         return (
-            <Card>
-                <CardContent>
-                    <Typography sx={{fontSize:18}}>{this.state.appName}</Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                    <Button size='small' onClick={this.handleClick}>Toggle Monitoring</Button>
-                </CardActions>
-            </Card>
+            <ListItem alignItems="flex-start" key={this.state.appName}>
+            <ListItemAvatar>
+              <Avatar alt={this.state.appName}/>
+            </ListItemAvatar>
+            <ListItemText
+              primary={this.state.appName}
+              secondary={
+                <>
+                  <Typography
+                    sx={{ display: 'inline' }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  >
+                  Monitored
+                  </Typography>
+                  {""}
+                </>
+              }
+            />
+            <ListItemButton onClick={this.handleClick}>Toggle Monitoring</ListItemButton>
+          </ListItem>
         )
     }
 
     displayNotMonitored = () => {
         return (
-            <Card style={{backgroundColor: "gray"}}>
-                <CardContent>
-                    <Typography sx={{fontSize:18}}>{this.state.appName}</Typography>
-                </CardContent>
-                <CardActions onClick={this.handleClick} disableSpacing>
-                    <Button size='small' onClick={this.handleClick}>Toggle Monitoring</Button>
-                </CardActions>
-            </Card>
+            <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar alt={this.state.appName}/>
+            </ListItemAvatar>
+            <ListItemText
+              primary={this.state.appName}
+              secondary={
+                <>
+                  <Typography
+                    sx={{ display: 'inline' }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  >
+                  Not Monitored
+                  </Typography>
+                  {""}
+                </>
+              }
+            />
+            <ListItemButton onClick={this.handleClick}>Toggle Monitoring</ListItemButton>
+          </ListItem>
         )
     }
 
     displayVulnerable = () => {
         return (
-            <Card style={{backgroundColor: "red"}}>
-                <CardContent>
-                    <Typography sx={{fontSize:18}}>{this.state.appName}</Typography>
-                </CardContent>
-                <CardActions onClick={this.handleClick} disableSpacing>
-                    <Button size='small' onClick={this.handleClick}>Toggle Monitoring</Button>
-                </CardActions>
-            </Card>
+            <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar alt={this.state.appName}/>
+            </ListItemAvatar>
+            <ListItemText
+              primary={this.state.appName}
+              secondary={
+                <>
+                  <Typography
+                    sx={{ display: 'inline' }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  >
+                  Vulnerable
+                  </Typography>
+                  {""}
+                </>
+              }
+            />
+            <ListItemButton onClick={this.handleClick}>Toggle Monitoring</ListItemButton>
+          </ListItem>
         )
     }
 

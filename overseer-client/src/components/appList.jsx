@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
-import { Component } from "react";
+import { Button, List, Divider } from "@mui/material";
+import { Component, Fragment } from "react";
 import { send_data, get_data } from "../service/overseerService";
 import { AppCard } from "./appCard";
 
@@ -8,8 +8,8 @@ export class AppList extends Component {
         super(props);
     
         this.state = {
-            installedApps: ["firefox", "chrome", "thunderbird", "steam", "skype"],
-            monitoredApps: ["firefox", "chrome", "thunderbird", "steam", "skype"],
+            installedApps: ["firefox", "chrome", "7-zip", "steam", "skype"],
+            monitoredApps: ["firefox", "chrome", "7-zip", "steam", "skype"],
             vulnerable: [],
         };
     }
@@ -62,11 +62,14 @@ export class AppList extends Component {
         return (
             <div>
                 <Button></Button>
+                <List sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
                 {this.state.installedApps.map(name => 
-                <li style={{listStyle: 'none', paddingBottom: '1em'}}>
+                    <Fragment>
+                    <Divider variant="inset" component="li" />
                     <AppCard onChange={this.onCardChange} appName={name} monitored={this.isMonitored(name)} vulnerable={this.isVulnerable(name)}></AppCard>
-                </li>
+                    </Fragment>
                 )}
+                </List>
             </div>
         );
     }
