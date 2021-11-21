@@ -12,6 +12,7 @@ function createWindow() {
       nodeIntegration: true,
       enableRemoteModule: true,
     },
+    title: "Overseer Client",
   });
 
   // and load the index.html of the app.
